@@ -2,9 +2,10 @@ import React from "react";
 
 type configTypes = {
   size: [number, number];
+  callbackRender: Function;
 };
 
-const ViewerCanvas = ({ size }: configTypes) => {
+const ViewerCanvas = ({ size, callbackRender }: configTypes) => {
   const [config, setConfig] = React.useState({
     size: [size[0] * 10, size[1] * 10],
   });
@@ -35,11 +36,19 @@ const ViewerCanvas = ({ size }: configTypes) => {
   };
 
   React.useEffect(() => {
-    const canvas = document.getElementById("Viewer__canvas")!;
-
+    const canvas: HTMLCanvasElement = Array.from(
+      document.getElementsByTagName("canvas")
+    ).find((element) => element.id == "Viewer__canvas")!;
     adjustSize(canvas);
   }, []);
 
+  React.useEffect(() => {
+    const canvas: HTMLCanvasElement = Array.from(
+      document.getElementsByTagName("canvas")
+    ).find((element) => element.id == "Viewer__canvas")!;
+    const ctx = canvas.getContext("2d");
+    callbackRender(canvas, ctx);
+  });
   return (
     <canvas
       id="Viewer__canvas"

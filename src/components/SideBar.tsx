@@ -1,9 +1,14 @@
 import React from "react";
 import OpenCvInput from "./molecules/OpenCvInput";
 
-export default function SideBar() {
-  const [values, setValues] = React.useState({});
+type props = {
+  setValues: Function;
+  values: {
+    fullname?: string;
+  };
+};
 
+export default function SideBar({ values, setValues }: props) {
   return (
     <div className="SideBar">
       <h1>Open CV</h1>
@@ -18,8 +23,8 @@ export default function SideBar() {
         />
         <OpenCvInput
           type="paragraph"
-          keyValue={"fullname"}
-          placeholder={"fullname"}
+          keyValue={"extra"}
+          placeholder={"extra"}
           setValue={setValues}
           value={values}
         />

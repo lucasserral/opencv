@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   placeholder: string;
   setValue: Function;
-  value: { [key: string]: string };
+  value: { [key: string]: string | undefined };
   keyValue: string;
   type: "shortText" | "paragraph";
   required?: boolean;
