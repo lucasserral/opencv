@@ -33,12 +33,14 @@ function OpenCvInput({
       );
       break;
     case "paragraph":
-      <textarea
-        placeholder={placeholder}
-        onChange={(evt) => updateValue(setValue, keyValue, evt.target.value)}
-        value={value[keyValue] || ""}
-        required={required}
-      />;
+      return (
+        <textarea
+          placeholder={placeholder}
+          onChange={(evt) => updateValue(setValue, keyValue, evt.target.value)}
+          value={value[keyValue] || ""}
+          required={required}
+        />
+      );
 
     default:
       break;
