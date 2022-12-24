@@ -9,7 +9,7 @@ const ViewerCanvas = ({ size }: configTypes) => {
     size: [size[0] * 10, size[1] * 10],
   });
 
-  const adjustSize = (element: Element) => {
+  const adjustSize = (element: HTMLElement) => {
     const canvasWidth = element.clientWidth;
     const canvasHeight = element.clientHeight;
     const canvasContainerWidth = element.parentElement!.clientWidth;
@@ -21,21 +21,16 @@ const ViewerCanvas = ({ size }: configTypes) => {
     const maxSizePercentage = 0.9;
 
     if (intersectionHeightRatio <= intersectionWidthRatio) {
-      setConfig((prev) => ({
-        ...prev,
-        size: [
-          prev.size[0] * intersectionHeightRatio * maxSizePercentage,
-          prev.size[1] * intersectionHeightRatio * maxSizePercentage,
-        ],
-      }));
+      element.style.scale = `${intersectionHeightRatio * maxSizePercentage}`;
+      // setConfig((prev) => ({
+      //   ...prev,
+      //   size: [
+      //     prev.size[0] * intersectionHeightRatio * maxSizePercentage,
+      //     prev.size[1] * intersectionHeightRatio * maxSizePercentage,
+      //   ],
+      // }));
     } else {
-      setConfig((prev) => ({
-        ...prev,
-        size: [
-          prev.size[0] * intersectionWidthRatio * maxSizePercentage,
-          prev.size[1] * intersectionWidthRatio * maxSizePercentage,
-        ],
-      }));
+      element.style.scale = `${intersectionWidthRatio * maxSizePercentage}`;
     }
   };
 
