@@ -1,14 +1,14 @@
-import React from 'react'
-import SideBar from './components/SideBar'
+import React from "react";
+import SideBar from "./components/SideBar";
+import Viewer from "./components/Viewer";
 
 function App() {
-
   return (
     <div className="App">
       <SideBar />
-      <p>OPEN CV</p>
+      <Viewer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

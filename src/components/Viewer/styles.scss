@@ -1,0 +1,15 @@
+.Viewer {
+  &__container {
+    background-color: rgb(24, 19, 44);
+    height: 100vh;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__canvas {
+    background-color: #fff;
+    position: absolute;
+    border-radius: 4px;
+  }
+}
