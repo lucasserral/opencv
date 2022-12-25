@@ -1,10 +1,13 @@
 import React from "react";
 import OpenCvInput from "./molecules/OpenCvInput";
 
-type sections = Array<{
+type section = {
+  key: string;
   title: string;
-  sectionItems: Array<{ title: string; description: string }>;
-}>;
+  sectionItems: Array<{ key: string; title: string; description: string }>;
+};
+
+type sections = Array<section>;
 
 type props = {
   setValues: Function;
@@ -71,11 +74,47 @@ export default function SideBar({
         </section>
         <section>
           {sections.map((section) => (
-            <div>
-              <h2>{section.title}</h2>
-              <div>
+            <div className="SideBar__Section" key={section.key}>
+              <div className="SideBar__Section--header">
+                <h2>{section.title}</h2>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSections((prev: sections) => {
+                      const sects = [...prev];
+                      const i = sects.findIndex(
+                        (sect) => sect.key == section.key
+                      );
+                      sects.splice(i, 1);
+                      return sects;
+                    });
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              <div className="SideBar__SectionItems--container">
                 {section.sectionItems.map((sectionItem, index) => (
-                  <div>
+                  <div key={sectionItem.key} className="SideBar__SectionItems">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSections((prev: sections) => {
+                          const sects = [...prev];
+                          const i = sects.findIndex(
+                            (sect) => sect.key == section.key
+                          );
+                          const ii = sects[i].sectionItems.findIndex(
+                            (sectItem) => sectItem.key == sectionItem.key
+                          );
+                          sects[i].sectionItems.splice(ii, 1);
+                          return sects;
+                        });
+                      }}
+                    >
+                      X
+                    </button>
                     <input
                       placeholder={sectionItem.title || "title"}
                       value={sectionItem.title}
@@ -106,7 +145,6 @@ export default function SideBar({
                           const i = prevThisSectItems.findIndex(
                             (sect) => sect.title == sectionItem.title
                           );
-                          // return prev;
                           prevThisSectItems[i].description = value;
                           return previowsSections;
                         });
