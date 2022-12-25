@@ -125,17 +125,16 @@ export default function SideBar({
                       <button
                         type="button"
                         onClick={() => {
-                          setSections((prev: sections) => {
-                            const sects = [...prev];
-                            const i = sects.findIndex(
-                              (sect) => sect.key == section.key
-                            );
-                            const ii = sects[i].sectionItems.findIndex(
-                              (sectItem) => sectItem.key == sectionItem.key
-                            );
-                            sects[i].sectionItems.splice(ii, 1);
-                            return sects;
-                          });
+                          const sects = [...sections];
+                          const i = sects.findIndex(
+                            (sect) => sect.key == section.key
+                          );
+                          const ii = sects[i].sectionItems.findIndex(
+                            (sectItem) => sectItem.key == sectionItem.key
+                          );
+                          sects[i].sectionItems.splice(ii, 1);
+                          console.log({ after: sects });
+                          setSections(sects);
                         }}
                       >
                         X
