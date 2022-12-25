@@ -73,10 +73,10 @@ export default function SideBar({
           /> */}
         </section>
         <section>
-          {sections.map((section) => (
+          {sections.map((section, index) => (
             <div className="SideBar__Section" key={section.key}>
               <div className="SideBar__Section--header">
-                <h2>{section.title}</h2>
+                <h2 className="title">{section.title}</h2>
 
                 <button
                   type="button"
@@ -95,44 +95,52 @@ export default function SideBar({
                 </button>
               </div>
               <div className="SideBar__SectionItems--container">
-                {section.sectionItems.map((sectionItem, index) => (
+                {section.sectionItems.map((sectionItem, i) => (
                   <div key={sectionItem.key} className="SideBar__SectionItems">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSections((prev: sections) => {
-                          const sects = [...prev];
-                          const i = sects.findIndex(
-                            (sect) => sect.key == section.key
-                          );
-                          const ii = sects[i].sectionItems.findIndex(
-                            (sectItem) => sectItem.key == sectionItem.key
-                          );
-                          sects[i].sectionItems.splice(ii, 1);
-                          return sects;
-                        });
-                      }}
-                    >
-                      X
-                    </button>
-                    <input
-                      placeholder={sectionItem.title || "title"}
-                      value={sectionItem.title}
-                      onChange={(evt) => {
-                        const value = evt.target.value;
-                        setSections((prev: sections) => {
-                          const previowsSections = [...prev];
-                          const prevThisSectItems =
-                            previowsSections[index].sectionItems;
-                          const i = prevThisSectItems.findIndex(
-                            (sect) => sect.title == sectionItem.title
-                          );
-                          // return prev;
-                          prevThisSectItems[i].title = value;
-                          return previowsSections;
-                        });
-                      }}
-                    />
+                    <div className="SideBar__SectionItems--header">
+                      <input
+                        className="title"
+                        placeholder={sectionItem.title || "title"}
+                        value={sectionItem.title}
+                        onChange={(evt) => {
+                          const value = evt.target.value;
+                          setSections((prev: sections) => {
+                            const previowsSections = [...prev];
+                            const prevThisSectItems =
+                              previowsSections[index].sectionItems;
+                            console.log(prevThisSectItems);
+                            const i = prevThisSectItems.findIndex((sect) => {
+                              console.log({
+                                sect: sect.key,
+                                sectionItem: sectionItem.key,
+                              });
+                              return sect.key == sectionItem.key;
+                            });
+                            // return prev;
+                            prevThisSectItems[i].title = value;
+                            return previowsSections;
+                          });
+                        }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSections((prev: sections) => {
+                            const sects = [...prev];
+                            const i = sects.findIndex(
+                              (sect) => sect.key == section.key
+                            );
+                            const ii = sects[i].sectionItems.findIndex(
+                              (sectItem) => sectItem.key == sectionItem.key
+                            );
+                            sects[i].sectionItems.splice(ii, 1);
+                            return sects;
+                          });
+                        }}
+                      >
+                        X
+                      </button>
+                    </div>
                     <textarea
                       placeholder={sectionItem.description || "description"}
                       value={sectionItem.description}
@@ -143,7 +151,7 @@ export default function SideBar({
                           const prevThisSectItems =
                             previowsSections[index].sectionItems;
                           const i = prevThisSectItems.findIndex(
-                            (sect) => sect.title == sectionItem.title
+                            (sect) => sect.key == sectionItem.key
                           );
                           prevThisSectItems[i].description = value;
                           return previowsSections;
