@@ -1,4 +1,62 @@
+@mixin inputMixin {
+  outline: none;
+  border: 1px black solid;
+  padding: 4px 8px;
+  overflow: auto;
+}
+
 .App {
   height: 100vh;
   display: flex;
+  justify-content: stretch;
+}
+
+.SideBar {
+  overflow-y: auto;
+  & input {
+    @include inputMixin();
+    border-radius: 100px;
+  }
+
+  & textarea {
+    @include inputMixin();
+    border-radius: 16px;
+  }
+
+  &__closeButton {
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 8px;
+    background-color: #bbb;
+    margin-left: 8px;
+  }
+  &__Section {
+    &Items {
+      &--header {
+        display: flex;
+        & > .title {
+          flex-grow: 1;
+        }
+      }
+      display: flex;
+      gap: 4px;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+    &--header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: stretch;
+      margin-bottom: 4px;
+      & > .title {
+        flex-grow: 1;
+        margin: 0;
+      }
+      & button {
+        border-radius: 12px;
+        width: 2rem;
+      }
+    }
+  }
 }
