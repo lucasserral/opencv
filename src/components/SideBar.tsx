@@ -21,7 +21,7 @@ export default function SideBar({
   return (
     <div className="SideBar">
       <h1>Open CV</h1>
-      <form className="SideBar__form">
+      <div className="SideBar__form">
         <OpenCvInput
           type="shortText"
           keyValue={"fullname"}
@@ -77,7 +77,7 @@ export default function SideBar({
           ))}
           <button type="button">Add section</button>
         </section>
-      </form>
+      </div>
     </div>
   );
 }

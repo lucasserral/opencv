@@ -1,17 +1,24 @@
 import React from "react";
+import { SectionItem } from "./SectionItem";
+import { SectionTitle } from "./SectionTitle";
 
 type props = {
   sections: sections;
   setSections: Function;
   index: number;
   section: section;
+  key: any;
 };
 
 const Section = ({ section, setSections, sections, index }: props) => {
   return (
     <div className="SideBar__Section" key={section.key}>
       <div className="SideBar__Section--header">
-        <h2 className="title">{section.title}</h2>
+        <SectionTitle
+          setSections={setSections}
+          sectionTitle={section.title}
+          id={section.key}
+        />
 
         <button
           className="SideBar__closeButton"
@@ -30,67 +37,14 @@ const Section = ({ section, setSections, sections, index }: props) => {
       </div>
       <div className="SideBar__SectionItems--container">
         {section.sectionItems.map((sectionItem, i) => (
-          <div key={sectionItem.key} className="SideBar__SectionItems">
-            <div className="SideBar__SectionItems--header">
-              <input
-                className="title"
-                placeholder={sectionItem.title || "title"}
-                value={sectionItem.title}
-                onChange={(evt) => {
-                  const value = evt.target.value;
-                  setSections((prev: sections) => {
-                    const previowsSections = [...prev];
-                    const prevThisSectItems =
-                      previowsSections[index].sectionItems;
-                    console.log(prevThisSectItems);
-                    const i = prevThisSectItems.findIndex((sect) => {
-                      console.log({
-                        sect: sect.key,
-                        sectionItem: sectionItem.key,
-                      });
-                      return sect.key == sectionItem.key;
-                    });
-                    // return prev;
-                    prevThisSectItems[i].title = value;
-                    return previowsSections;
-                  });
-                }}
-              />
-              <button
-                type="button"
-                className="SideBar__closeButton"
-                onClick={() => {
-                  const sects = [...sections];
-                  const i = sects.findIndex((sect) => sect.key == section.key);
-                  const ii = sects[i].sectionItems.findIndex(
-                    (sectItem) => sectItem.key == sectionItem.key
-                  );
-                  sects[i].sectionItems.splice(ii, 1);
-                  console.log({ after: sects });
-                  setSections(sects);
-                }}
-              >
-                X
-              </button>
-            </div>
-            <textarea
-              placeholder={sectionItem.description || "description"}
-              value={sectionItem.description}
-              onChange={(evt) => {
-                const value = evt.target.value;
-                setSections((prev: sections) => {
-                  const previowsSections = [...prev];
-                  const prevThisSectItems =
-                    previowsSections[index].sectionItems;
-                  const i = prevThisSectItems.findIndex(
-                    (sect) => sect.key == sectionItem.key
-                  );
-                  prevThisSectItems[i].description = value;
-                  return previowsSections;
-                });
-              }}
-            />
-          </div>
+          <SectionItem
+            key={sectionItem.key}
+            section={section}
+            sectionItem={sectionItem}
+            sections={sections}
+            index={index}
+            setSections={setSections}
+          />
         ))}
       </div>
       <button
