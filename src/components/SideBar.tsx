@@ -75,7 +75,23 @@ export default function SideBar({
               sections={sections}
             />
           ))}
-          <button type="button">Add section</button>
+          <button
+            type="button"
+            onClick={() => {
+              setSections((prev: sections) => {
+                const arr = [...prev];
+                const section: section = {
+                  title: "section",
+                  sectionItems: [],
+                  key: Number(Math.random() * 1000).toFixed(0),
+                };
+                arr.push(section);
+                return arr;
+              });
+            }}
+          >
+            Add section
+          </button>
         </section>
       </div>
     </div>
