@@ -79,6 +79,7 @@ export default function SideBar({
                 <h2 className="title">{section.title}</h2>
 
                 <button
+                  className="SideBar__closeButton"
                   type="button"
                   onClick={() => {
                     setSections((prev: sections) => {
@@ -124,6 +125,7 @@ export default function SideBar({
                       />
                       <button
                         type="button"
+                        className="SideBar__closeButton"
                         onClick={() => {
                           const sects = [...sections];
                           const i = sects.findIndex(
@@ -160,8 +162,23 @@ export default function SideBar({
                   </div>
                 ))}
               </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const previows = [...sections];
+                  previows[index].sectionItems.push({
+                    key: `key_${previows[index].sectionItems.length}`,
+                    title: "",
+                    description: "",
+                  });
+                  setSections(previows);
+                }}
+              >
+                Add item
+              </button>
             </div>
           ))}
+          <button type="button">Add section</button>
         </section>
       </form>
     </div>
