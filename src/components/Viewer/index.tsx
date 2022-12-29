@@ -2,18 +2,6 @@ import React from "react";
 import OpenCvInput from "../molecules/OpenCvInput";
 import { ViewerCanvas } from "./ViewerCanvas";
 
-type values = {
-  fullname?: string;
-  position?: string;
-  phone?: string;
-  email?: string;
-};
-
-type sections = Array<{
-  title: string;
-  sectionItems: Array<{ title: string; description: string }>;
-}>;
-
 type props = {
   values: values;
   sections: Array<any>;
