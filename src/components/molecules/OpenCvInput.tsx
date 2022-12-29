@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   placeholder: string;
   setValue: Function;
-  value: { [key: string]: string };
+  value: { [key: string]: string | undefined };
   keyValue: string;
   type: "shortText" | "paragraph";
   required?: boolean;
@@ -33,12 +33,14 @@ function OpenCvInput({
       );
       break;
     case "paragraph":
-      <textarea
-        placeholder={placeholder}
-        onChange={(evt) => updateValue(setValue, keyValue, evt.target.value)}
-        value={value[keyValue] || ""}
-        required={required}
-      />;
+      return (
+        <textarea
+          placeholder={placeholder}
+          onChange={(evt) => updateValue(setValue, keyValue, evt.target.value)}
+          value={value[keyValue] || ""}
+          required={required}
+        />
+      );
 
     default:
       break;
